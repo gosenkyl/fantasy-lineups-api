@@ -2,21 +2,20 @@ package com.gosenk.fantasy.lineups.api.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User extends BaseEntity implements UserDetails {
 
     static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "id", nullable = false, updatable = false)
-    private String id;
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -49,14 +48,6 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         // credentials never expire
         return true;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override
